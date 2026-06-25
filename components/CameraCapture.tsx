@@ -44,8 +44,6 @@ export function CameraCapture({ onCapture, onCancel }: { onCapture: (dataUrl: st
 
   return (
     <section className="card camera-card">
-      <h1>撮影画面</h1>
-      <p className="lead">白いガイド枠に申込表の四隅を合わせて、縦向きのまま撮影してください。</p>
       {error ? (
         <p className="notice">{error}</p>
       ) : (
