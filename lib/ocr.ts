@@ -1,4 +1,4 @@
-import { createWorker } from 'tesseract.js';
+import { createWorker, PSM } from 'tesseract.js';
 import { normalizeQuantity } from './calc';
 import { canvasToDataUrl, cropQuantityCells, imageSourceToCanvas } from './imageProcessing';
 import type { OcrResult } from '../types';
@@ -16,7 +16,7 @@ export async function recognizeQuantities(image: Blob | string, onProgress?: (me
   });
   await worker.setParameters({
     tessedit_char_whitelist: '0123456789',
-    tessedit_pageseg_mode: '7',
+    tessedit_pageseg_mode: PSM.SINGLE_LINE,
   });
   const quantities: number[] = [];
   try {
