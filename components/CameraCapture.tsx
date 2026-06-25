@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+const FORM_ASPECT_RATIO = 487 / 1063;
+
 export function CameraCapture({ onCapture, onCancel }: { onCapture: (dataUrl: string) => void; onCancel: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -10,7 +12,7 @@ export function CameraCapture({ onCapture, onCancel }: { onCapture: (dataUrl: st
   useEffect(() => {
     let mounted = true;
     navigator.mediaDevices
-      ?.getUserMedia({ video: { facingMode: { ideal: 'environment' }, aspectRatio: { ideal: 0.56 } }, audio: false })
+      ?.getUserMedia({ video: { facingMode: { ideal: 'environment' }, width: { ideal: 1080 }, height: { ideal: 1920 } }, audio: false })
       .then((stream) => {
         if (!mounted) return;
         streamRef.current = stream;
@@ -25,19 +27,39 @@ export function CameraCapture({ onCapture, onCancel }: { onCapture: (dataUrl: st
 
   const capture = () => {
     const video = videoRef.current;
-    if (!video || video.videoWidth === 0) return;
+    if (!video || video.videoWidth === 0 || video.videoHeight === 0) return;
+
+    const sourceAspectRatio = video.videoWidth / video.videoHeight;
+    const cropWidth = sourceAspectRatio > FORM_ASPECT_RATIO ? Math.round(video.videoHeight * FORM_ASPECT_RATIO) : video.videoWidth;
+    const cropHeight = sourceAspectRatio > FORM_ASPECT_RATIO ? video.videoHeight : Math.round(video.videoWidth / FORM_ASPECT_RATIO);
+    const sx = Math.max(0, Math.round((video.videoWidth - cropWidth) / 2));
+    const sy = Math.max(0, Math.round((video.videoHeight - cropHeight) / 2));
+
     const canvas = document.createElement('canvas');
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    canvas.getContext('2d')?.drawImage(video, 0, 0);
+    canvas.width = cropWidth;
+    canvas.height = cropHeight;
+    canvas.getContext('2d')?.drawImage(video, sx, sy, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
     onCapture(canvas.toDataURL('image/jpeg', 0.92));
   };
 
   return (
     <section className="card camera-card">
       <h1>撮影画面</h1>
-      <p className="lead">申込表全体が縦に入るように、スマホを縦向きにして表の上下端まで映してください。</p>
-      {error ? <p className="notice">{error}</p> : <video ref={videoRef} className="video" autoPlay playsInline muted />}
+      <p className="lead">白いガイド枠に申込表の四隅を合わせて、縦向きのまま撮影してください。</p>
+      {error ? (
+        <p className="notice">{error}</p>
+      ) : (
+        <div className="camera-frame" aria-label="申込表を合わせる撮影ガイド">
+          <video ref={videoRef} className="video" autoPlay playsInline muted />
+          <div className="form-guide" aria-hidden="true">
+            <span className="guide-corner top-left" />
+            <span className="guide-corner top-right" />
+            <span className="guide-corner bottom-left" />
+            <span className="guide-corner bottom-right" />
+            <span className="guide-label">申込表をこの枠に合わせる</span>
+          </div>
+        </div>
+      )}
       <div className="actions">
         <button className="button" onClick={capture} disabled={Boolean(error)}>撮影する</button>
         <button className="button ghost" onClick={onCancel}>戻る</button>

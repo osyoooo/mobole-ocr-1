@@ -23,7 +23,16 @@ body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-
 .button.ghost { background: #eef2f1; color: #243b37; }
 .button:disabled { opacity: .6; cursor: not-allowed; }
 .camera-card { min-height: calc(100dvh - 40px); display: flex; flex-direction: column; }
-.video { width: 100%; min-height: 68dvh; max-height: 78dvh; flex: 1; object-fit: contain; background: #111; border-radius: 16px; }
+.camera-frame { position: relative; width: min(100%, 32dvh); max-width: 420px; aspect-ratio: 487 / 1063; max-height: 70dvh; margin: 10px auto 0; overflow: hidden; background: #111; border-radius: 18px; }
+.video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #111; }
+.form-guide { position: absolute; inset: 3.5%; border: 2px solid rgba(255,255,255,.92); border-radius: 8px; box-shadow: 0 0 0 999px rgba(0,0,0,.22); pointer-events: none; }
+.form-guide::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, transparent 82.3%, rgba(20,184,166,.4) 82.3%, rgba(20,184,166,.4) 100%), repeating-linear-gradient(to bottom, transparent 0, transparent calc(100% / 22 - 1px), rgba(255,255,255,.28) calc(100% / 22 - 1px), rgba(255,255,255,.28) calc(100% / 22)); }
+.guide-corner { position: absolute; width: 24px; height: 24px; border-color: #14f1d9; border-style: solid; }
+.guide-corner.top-left { top: -2px; left: -2px; border-width: 4px 0 0 4px; }
+.guide-corner.top-right { top: -2px; right: -2px; border-width: 4px 4px 0 0; }
+.guide-corner.bottom-left { bottom: -2px; left: -2px; border-width: 0 0 4px 4px; }
+.guide-corner.bottom-right { right: -2px; bottom: -2px; border-width: 0 4px 4px 0; }
+.guide-label { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); width: max-content; max-width: calc(100% - 20px); padding: 6px 10px; border-radius: 999px; background: rgba(15,118,110,.88); color: white; font-size: 12px; font-weight: 700; }
 .preview { width: 100%; border-radius: 16px; border: 1px solid var(--line); }
 .status { text-align: center; padding: 30px 10px; }
 .spinner { width: 42px; height: 42px; border: 5px solid #d7eeea; border-top-color: var(--primary); border-radius: 50%; margin: 0 auto 16px; animation: spin 1s linear infinite; }
