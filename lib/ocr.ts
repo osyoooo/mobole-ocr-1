@@ -1,7 +1,7 @@
 import { createWorker } from 'tesseract.js';
 import { normalizeQuantity } from './calc';
 import { canvasToDataUrl, cropQuantityCells, imageSourceToCanvas } from './imageProcessing';
-import type { OcrResult } from '@/types';
+import type { OcrResult } from '../types';
 
 export async function recognizeQuantities(image: Blob | string, onProgress?: (message: string) => void): Promise<OcrResult> {
   onProgress?.('画像を読み込んでいます...');

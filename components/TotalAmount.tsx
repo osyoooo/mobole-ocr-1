@@ -1,4 +1,4 @@
-import { formatYen } from '@/lib/calc';
+import { formatYen } from '../lib/calc';
 
 export function TotalAmount({ total }: { total: number }) {
   return (

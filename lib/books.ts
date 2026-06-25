@@ -1,4 +1,4 @@
-import type { Book } from '@/types';
+import type { Book } from '../types';
 
 export const BOOKS: Book[] = [
   { no: 1, name: '書籍 No1', price: 10890 },

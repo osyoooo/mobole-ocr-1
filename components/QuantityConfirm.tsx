@@ -1,8 +1,8 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { BOOKS } from '@/lib/books';
-import { calculateTotal, normalizeQuantity } from '@/lib/calc';
+import { BOOKS } from '../lib/books';
+import { calculateTotal, normalizeQuantity } from '../lib/calc';
 import { TotalAmount } from './TotalAmount';
 
 export function QuantityConfirm({ initialQuantities, cellImages, onRetry }: { initialQuantities: number[]; cellImages: string[]; onRetry: () => void }) {

@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { CameraCapture } from '@/components/CameraCapture';
-import { ImageUploader } from '@/components/ImageUploader';
-import { OcrProgress } from '@/components/OcrProgress';
-import { QuantityConfirm } from '@/components/QuantityConfirm';
-import { recognizeQuantities } from '@/lib/ocr';
-import type { AppStep, OcrResult } from '@/types';
+import { CameraCapture } from '../components/CameraCapture';
+import { ImageUploader } from '../components/ImageUploader';
+import { OcrProgress } from '../components/OcrProgress';
+import { QuantityConfirm } from '../components/QuantityConfirm';
+import { recognizeQuantities } from '../lib/ocr';
+import type { AppStep, OcrResult } from '../types';
 
 export default function Home() {
   const [step, setStep] = useState<AppStep>('home');
