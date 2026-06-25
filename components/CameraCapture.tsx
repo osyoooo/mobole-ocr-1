@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-const FORM_ASPECT_RATIO = 487 / 1063;
+const OCR_STRIP_ASPECT_RATIO = 64 / 930;
 
 export function CameraCapture({ onCapture, onCancel }: { onCapture: (dataUrl: string) => void; onCancel: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -30,8 +30,8 @@ export function CameraCapture({ onCapture, onCancel }: { onCapture: (dataUrl: st
     if (!video || video.videoWidth === 0 || video.videoHeight === 0) return;
 
     const sourceAspectRatio = video.videoWidth / video.videoHeight;
-    const cropWidth = sourceAspectRatio > FORM_ASPECT_RATIO ? Math.round(video.videoHeight * FORM_ASPECT_RATIO) : video.videoWidth;
-    const cropHeight = sourceAspectRatio > FORM_ASPECT_RATIO ? video.videoHeight : Math.round(video.videoWidth / FORM_ASPECT_RATIO);
+    const cropWidth = sourceAspectRatio > OCR_STRIP_ASPECT_RATIO ? Math.round(video.videoHeight * OCR_STRIP_ASPECT_RATIO) : video.videoWidth;
+    const cropHeight = sourceAspectRatio > OCR_STRIP_ASPECT_RATIO ? video.videoHeight : Math.round(video.videoWidth / OCR_STRIP_ASPECT_RATIO);
     const sx = Math.max(0, Math.round((video.videoWidth - cropWidth) / 2));
     const sy = Math.max(0, Math.round((video.videoHeight - cropHeight) / 2));
 
@@ -47,14 +47,14 @@ export function CameraCapture({ onCapture, onCancel }: { onCapture: (dataUrl: st
       {error ? (
         <p className="notice">{error}</p>
       ) : (
-        <div className="camera-frame" aria-label="申込表を合わせる撮影ガイド">
+        <div className="camera-frame" aria-label="OCR対象列を合わせる撮影ガイド">
           <video ref={videoRef} className="video" autoPlay playsInline muted />
           <div className="form-guide" aria-hidden="true">
             <span className="guide-corner top-left" />
             <span className="guide-corner top-right" />
             <span className="guide-corner bottom-left" />
             <span className="guide-corner bottom-right" />
-            <span className="guide-label">申込表をこの枠に合わせる</span>
+            <span className="guide-label">OCR列を合わせる</span>
           </div>
         </div>
       )}
