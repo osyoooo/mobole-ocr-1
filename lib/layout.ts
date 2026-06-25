@@ -1,13 +1,15 @@
 export type RelativeRect = { x: number; y: number; width: number; height: number };
 
+// 添付された縦長の申込表画像（約487x1063）を基準にした相対座標です。
+// 申込冊数列の右側に印字されている「冊」は、rightPrintedUnitTrimで除外します。
 export const LAYOUT = {
-  quantityColumnX: 0.77,
-  quantityColumnWidth: 0.145,
-  firstRowY: 0.188,
-  rowHeight: 0.0348,
-  cellHeight: 0.0305,
-  rightPrintedUnitTrim: 0.25,
-  verticalPadding: 0.08,
+  quantityColumnX: 0.823,
+  quantityColumnWidth: 0.177,
+  firstRowY: 0.031,
+  rowHeight: 0.044,
+  cellHeight: 0.041,
+  rightPrintedUnitTrim: 0.38,
+  verticalPadding: 0.12,
   rows: 22,
 } as const;
 

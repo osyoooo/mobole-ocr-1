@@ -9,6 +9,10 @@ export function calculateTotal(quantities: number[]): number {
   return BOOKS.reduce((sum, book, index) => sum + book.price * normalizeQuantity(quantities[index] ?? 0), 0);
 }
 
+export function calculateTotalQuantity(quantities: number[]): number {
+  return quantities.reduce((sum, quantity) => sum + normalizeQuantity(quantity), 0);
+}
+
 export function formatYen(amount: number): string {
   return `${new Intl.NumberFormat('ja-JP').format(amount)}円`;
 }

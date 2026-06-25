@@ -10,7 +10,7 @@ export function CameraCapture({ onCapture, onCancel }: { onCapture: (dataUrl: st
   useEffect(() => {
     let mounted = true;
     navigator.mediaDevices
-      ?.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false })
+      ?.getUserMedia({ video: { facingMode: { ideal: 'environment' }, aspectRatio: { ideal: 0.56 } }, audio: false })
       .then((stream) => {
         if (!mounted) return;
         streamRef.current = stream;
@@ -34,8 +34,9 @@ export function CameraCapture({ onCapture, onCancel }: { onCapture: (dataUrl: st
   };
 
   return (
-    <section className="card">
+    <section className="card camera-card">
       <h1>撮影画面</h1>
+      <p className="lead">申込表全体が縦に入るように、スマホを縦向きにして表の上下端まで映してください。</p>
       {error ? <p className="notice">{error}</p> : <video ref={videoRef} className="video" autoPlay playsInline muted />}
       <div className="actions">
         <button className="button" onClick={capture} disabled={Boolean(error)}>撮影する</button>
