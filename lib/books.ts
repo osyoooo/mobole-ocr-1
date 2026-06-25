@@ -1,0 +1,26 @@
+import type { Book } from '@/types';
+
+export const BOOKS: Book[] = [
+  { no: 1, name: '書籍 No1', price: 10890 },
+  { no: 2, name: '書籍 No2', price: 9702 },
+  { no: 3, name: '書籍 No3', price: 1881 },
+  { no: 4, name: '書籍 No4', price: 6237 },
+  { no: 5, name: '書籍 No5', price: 2277 },
+  { no: 6, name: '書籍 No6', price: 8613 },
+  { no: 7, name: '書籍 No7', price: 2970 },
+  { no: 8, name: '書籍 No8', price: 2772 },
+  { no: 9, name: '書籍 No9', price: 3564 },
+  { no: 10, name: '書籍 No10', price: 2178 },
+  { no: 11, name: '書籍 No11', price: 3465 },
+  { no: 12, name: '書籍 No12', price: 1980 },
+  { no: 13, name: '書籍 No13', price: 2178 },
+  { no: 14, name: '書籍 No14', price: 3465 },
+  { no: 15, name: '書籍 No15', price: 4950 },
+  { no: 16, name: '書籍 No16', price: 4356 },
+  { no: 17, name: '書籍 No17', price: 3465 },
+  { no: 18, name: '書籍 No18', price: 2970 },
+  { no: 19, name: '書籍 No19', price: 3267 },
+  { no: 20, name: '書籍 No20', price: 1881 },
+  { no: 21, name: '書籍 No21', price: 4455 },
+  { no: 22, name: '書籍 No22', price: 5445 },
+];
